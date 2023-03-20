@@ -53,6 +53,11 @@ public class PayCommand extends CommandBase {
             return false;
         } 
 
+        if (!testForDiffPlayers(player, target)) {
+            player.sendMessage("Вы не можете переводить деньги себе.");
+            return false;
+        }
+
         economyManager.payMoney(player, target, money);;
 
         player.sendMessage("§aВы перевели " + money + economyManager.getMonetaryUnit() + " игроку " + target.getName() + ".");

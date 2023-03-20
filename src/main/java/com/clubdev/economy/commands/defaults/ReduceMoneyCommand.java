@@ -40,8 +40,13 @@ public class ReduceMoneyCommand extends CommandBase {
         }
 
         if (isCorrect(args[1])) {
-            economyManager.reduceMoney(target, parse(args[1]));
-            sender.sendMessage("§aВы забрали " + parse(args[1]) + economyManager.getMonetaryUnit() + " у игрока " + target.getName() + ".");
+            double money = parse(args[1]);
+            if (economyManager.getMoney(target) > 0) {
+                sender.sendMessage("§aВы забрали " + (economyManager.getMoney(target) > money ? money : economyManager.getMoney(target))  + economyManager.getMonetaryUnit() + " у игрока " + target.getName() + ".");
+                economyManager.reduceMoney(target, money);
+            } else {
+                sender.sendMessage("§cУ игрока " + target.getName() + " нет денег на балансе.");
+            }
         } else {
             sender.sendMessage("§cВы ввели неправильную сумму.");
         }

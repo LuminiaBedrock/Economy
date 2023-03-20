@@ -48,7 +48,7 @@ public class Database extends SQLiteDatabase {
         }
     }
 
-    public Account getMoney(UUID uuid) {
+    public Account getAccount(UUID uuid) {
         final String query = 
             "SELECT * FROM Economy WHERE uuid = :uuid;";
         try (Connection con = openConnection()) {
@@ -68,7 +68,7 @@ public class Database extends SQLiteDatabase {
     }
 
     public boolean hasAccount(UUID uuid) {
-        String query = "SELECT COUNT(*) FROM `Money` WHERE uuid = :uuid;";
+        String query = "SELECT COUNT(*) FROM `Economy` WHERE uuid = :uuid;";
         try (Connection con = openConnection()) {
             int count = con.createQuery(query)
                 .addParameter("uuid", uuid)
@@ -78,7 +78,7 @@ public class Database extends SQLiteDatabase {
     }
 
     public boolean hasAccounts() {
-        String query = "SELECT COUNT(*) FROM `Money`;";
+        String query = "SELECT COUNT(*) FROM `Economy`;";
         try (Connection con = openConnection()) {
             int count = con.createQuery(query)
                 .executeScalar(Integer.class);

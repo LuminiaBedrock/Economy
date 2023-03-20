@@ -1,15 +1,17 @@
 package com.clubdev.economy.commands;
 
+import cn.nukkit.Player;
 import cn.nukkit.IPlayer;
 import cn.nukkit.command.Command;
-
-import java.util.UUID;
+import cn.nukkit.command.CommandSender;
 
 import com.clubdev.economy.Economy;
 import com.clubdev.economy.managers.DonateEconomyManager;
 import com.clubdev.economy.managers.EconomyManager;
 import com.clubdev.economy.utils.Utils;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 public class CommandBase extends Command {
@@ -37,8 +39,6 @@ public class CommandBase extends Command {
         this.donateEconomyManager = main.getDonateEconomyManager();
     }
 
-    /* Парсинг строки в double */
-
     protected double parse(String string) {
         return Double.parseDouble(string);
     }
@@ -64,5 +64,24 @@ public class CommandBase extends Command {
 
     protected boolean hasAccount(IPlayer player) {
         return economy.getAccountManager().hasCachedAccount(player.getUniqueId());
+    }
+
+    /*
+     * Проверка на разных игроков.
+     * Например: это используется в классе PayCommand
+     * чтобы игрок не мог сделать перевод себе.
+     */
+
+    protected boolean testForDiffPlayers(Player player1, Player player2) {
+        return !player1.equals(player2);
+    }
+
+    protected boolean testForDiffPlayers(IPlayer player1, IPlayer player2) {
+        return !player1.equals(player2);
+    }
+
+
+    protected boolean testIngame(CommandSender sender) {
+        return sender instanceof Player;
     }
 }

@@ -28,13 +28,14 @@ public class MoneyCommand extends CommandBase {
             return false;
         }
 
-        if (!(sender instanceof Player) && args.length < 1) {
-            return false;
-        }
-
-        IPlayer target = (Player) sender;
+        IPlayer target;
         if (args.length == 1) {
             target = getOfflinePlayer(args[0]);
+        } else {
+            if (!(sender instanceof Player)) {
+                return false;
+            }
+            target = (Player) sender;
         }
 
         if (!hasAccount(target)) {
@@ -42,7 +43,7 @@ public class MoneyCommand extends CommandBase {
             return false;
         }
 
-        if (args.length == 0) {
+        if (args.length == 0 || args.length == 1 && testIngame(sender) && !testForDiffPlayers((Player) sender, target)) {
             sender.sendMessage("У вас на балансе: " + economyManager.getMoney(target) + economyManager.getMonetaryUnit());
         } else {
             sender.sendMessage("Баланс игрока " + target.getName() + ": " + economyManager.getMoney(target) + economyManager.getMonetaryUnit());

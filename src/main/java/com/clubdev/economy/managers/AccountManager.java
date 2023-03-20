@@ -2,7 +2,6 @@ package com.clubdev.economy.managers;
 
 import com.clubdev.economy.Account;
 import com.clubdev.economy.Economy;
-
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -20,13 +19,18 @@ public class AccountManager {
     }
 
     public void createAccount(UUID uuid) {
-        Account account = new Account(uuid, main.getEconomyManager().getDefaultMoney(), main.getDonateEconomyManager().getDefaultDonate());
+        Account account = new Account(uuid, 
+            main.getEconomyManager().getDefaultMoney(), 
+            main.getDonateEconomyManager().getDefaultDonate()
+        );
         main.getDatabase().createAccount(account);
         cachedAccounts.put(uuid, account);
     }
 
     public void updateCachedAccount(Account account) {
-        cachedAccounts.put(account.getUUID(), account);
+        Account cachedAccount = cachedAccounts.get(account.getUUID());
+        cachedAccount.setMoney(account.getMoney());
+        cachedAccount.setDonate(account.getDonate());
     }
 
     public void removeAccount(UUID uuid) {
@@ -40,12 +44,12 @@ public class AccountManager {
 
     /* 
      * Получение аккаунта напрямую из БД
-     * Для получение получения обычного (кешированого) аккаунта
-     * используйте getAccount(UUID uuid)
+     * Для получения обычного (кешированого) аккаунта
+     * используйте getAccount(UUID uuid) (рекомендуется)
      */
 
     public Account getRawAccount(UUID uuid) {
-        return main.getDatabase().getMoney(uuid);
+        return main.getDatabase().getAccount(uuid);
     }
 
     public boolean hasCachedAccount(UUID uuid) {
