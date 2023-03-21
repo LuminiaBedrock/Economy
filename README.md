@@ -25,7 +25,7 @@ EconomyManager manager = economy.getEconomyManager()
 [EconomyManager.java](https://github.com/ClubDevelopment/Economy/blob/main/src/main/java/com/clubdev/economy/managers/EconomyManager.java)
 
 ## [События](https://github.com/ClubDevelopment/Economy/tree/main/src/main/java/com/clubdev/economy/event)
-Примечание: все приведенные события ниже являются отменяемыми и могут быть отменены методом `event.setCancelled()`
+Примечание: все приведенные ниже события являются отменяемыми, а значит могут быть отменены методом `event.setCancelled()`
 
 ### SetMoneyEvent
 Вызывается при установке денег пользователю
