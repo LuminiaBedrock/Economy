@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 public class Economy extends PluginBase {
 
-    public static Economy instance;
+    @Getter private static Economy instance;
     
     private Database database;
     private AccountManager accountManager;
