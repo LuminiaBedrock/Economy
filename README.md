@@ -48,7 +48,7 @@ EconomyManager manager = economy.getEconomyManager()
 ### PayMoneyEvent
 Вызывается при переводе денег между пользователями
 
-`Double money` - переведенные деньги,    
+`double money` - переведенные деньги,    
 `Account player` - аккаунт пользователя который перевел деньги,   
 `Account target` - аккаунт пользователя которому перевели деньги.
 
