@@ -32,4 +32,15 @@ public class Utils {
 
         return true;
     }
+
+    public static String getNormalStringMoney(double price) {
+        String stringPrice = String.valueOf(price);
+        if (stringPrice.contains(".")) {
+            String[] parts = stringPrice.split("\\.");
+            if (parts[1].length() > 2) {
+                stringPrice = parts[0] + "." + parts[1].substring(0, 2);
+            }
+        }
+        return stringPrice;
+    }
 }

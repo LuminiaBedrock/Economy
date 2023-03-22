@@ -8,6 +8,7 @@ import cn.nukkit.command.data.CommandParameter;
 
 import com.clubdev.economy.Economy;
 import com.clubdev.economy.commands.CommandBase;
+import com.clubdev.economy.utils.Utils;
 
 public class MoneyCommand extends CommandBase {
     
@@ -44,9 +45,9 @@ public class MoneyCommand extends CommandBase {
         }
 
         if (args.length == 0 || args.length == 1 && testIngame(sender) && !testForDiffPlayers((Player) sender, target)) {
-            sender.sendMessage("У вас на балансе: " + economyManager.getMoney(target) + economyManager.getMonetaryUnit());
+            sender.sendMessage("У вас на балансе: " + Utils.getNormalStringMoney(economyManager.getMoney(target)) + economyManager.getMonetaryUnit());
         } else {
-            sender.sendMessage("Баланс игрока " + target.getName() + ": " + economyManager.getMoney(target) + economyManager.getMonetaryUnit());
+            sender.sendMessage("Баланс игрока " + target.getName() + ": " + Utils.getNormalStringMoney(economyManager.getMoney(target)) + economyManager.getMonetaryUnit());
         }
 
         return false;

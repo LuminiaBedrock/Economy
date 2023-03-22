@@ -1,0 +1,17 @@
+name: Economy
+version: "1.0"
+api: ["1.0.14"]
+author: Koshak_Mine, MEFRREEX
+main: com.clubdev.economy.Economy
+
+permissions:
+  economy.addmoney:
+    default: op
+  economy.reducemoney:
+    default: op
+  economy.pay:
+    default: true
+  economy.money:
+    default: true
+  economy.setmoney:
+    default: op

@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 public class Economy extends PluginBase {
 
-    public static Economy instance;
+    @Getter private static Economy instance;
     
     private Database database;
     private AccountManager accountManager;
@@ -23,13 +23,12 @@ public class Economy extends PluginBase {
 
     @Override
     public void onLoad() {
+        instance = this;
         this.accountManager = new AccountManager(this);
     }
     
     @Override
     public void onEnable() {
-        instance = this;
-        
         this.database = new Database(this);
         this.economyManager = new EconomyManager(this);
         this.donateEconomyManager = new DonateEconomyManager(this);
